@@ -1,18 +1,27 @@
 {
-    "manifest_version": 3,
-    "name": "Ghost.org Anchor Link Generator",
-    "description": "This extension generates a markdown list of anchor links for h1, h2, h3 tags in the Ghost.org editor.",
-    "version": "1.0",
-    "permissions": ["activeTab", "clipboardWrite"],
-    "background": {
-        "service_worker": "background.js"
+  "name": "Ghost.org Anchor Link Generator",
+  "version": "1.0",
+  "description": "Generate anchor links from headings in the Ghost editor",
+  "manifest_version": 3,
+  "permissions": ["activeTab", "scripting"],
+  "icons": {
+    "16": "images/galg16.png",
+    "48": "images/galg48.png",
+    "128": "images/galg128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/galg16.png",
+      "48": "images/galg48.png",
+      "128": "images/galg128.png"
     },
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "images/get_started16.png",
-            "48": "images/get_started48.png",
-            "128": "images/get_started128.png"
-        }
+    "default_title": "Ghost.org Anchor Link Generator",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*/ghost/*"],
+      "js": ["content.js"]
     }
+  ]
 }
