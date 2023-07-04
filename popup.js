@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 // Ensure the extension is used on a Ghost editor page
                 if (!tab.url.includes('/ghost/')) {
-                    throw new Error('This extension is designed to be used in Ghost editor.');
+                    throw new Error('This extension is designed to be used in the Ghost editor.');
                 }
 
                 const storage = await chrome.storage.sync.get({
@@ -52,16 +52,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 }
 
                 status.textContent = 'ToC copied to clipboard!';
-                status.classList.add('update');
+                status.classList.add('status-update');
                 
                 setTimeout(() => {
                     status.textContent = '';
-                    status.classList.remove('update');
+                    status.classList.remove('status-update');
                 }, 3000);
             } catch (error) {
                 console.error('An error occurred:', error);
                 status.textContent = `Error: ${error.message}`;
-                status.classList.add('error', 'update');
+                status.classList.add('status-error', 'status-update');
             } finally {
                 generateButton.disabled = false;
             }
