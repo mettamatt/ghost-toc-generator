@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Ghost ToC Generator",
+  "name": "Ghost CMS ToC Generator",
   "version": "1.0",
+  "description": "A Chrome extension to generate a Table of Contents for your Ghost CMS posts. Customize heading levels and copy the markdown ToC directly to your clipboard with a single click!",
   "permissions": ["activeTab", "scripting", "clipboardWrite", "storage"],
   "action": {
     "default_popup": "popup.html",

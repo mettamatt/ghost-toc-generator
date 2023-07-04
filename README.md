@@ -1,47 +1,45 @@
-# Ghost.org Anchor Link Generator
+# Ghost CMS ToC Generator
+
+![Logo](./images/icon128.png)
 
 ## Description
+The Ghost CMS ToC Generator is a Chrome extension designed to help Ghost  users easily generate a Table of Contents (ToC) for their posts. It is highly customizable, allowing users to choose which heading levels to include in the ToC. Once generated, the ToC can be copied to your clipboard with a single click, ready to be pasted directly into your post.
 
-This is a Google Chrome extension for generating a markdown list of anchor links for `h1`, `h2`, `h3` tags in the Ghost.org editor. 
-
-The extension is designed for users of the Ghost.org blogging platform, as well as users of the open-source Ghost software, who wish to create anchor links in their posts for easy navigation.
-
-## Installation
-
-Since this extension is not available on the Chrome Web Store, you will need to load it manually. Here's how:
-
-1. Clone this repository or download the zip file and unzip it.
-2. Open Google Chrome and navigate to `chrome://extensions/`.
-3. Check the box for Developer mode in the top right.
-4. Click on the `Load unpacked` button that appeared when you enabled Developer mode.
-5. Navigate to the directory where you cloned or unzipped this repository and click `Select`.
-
-The extension should now be installed and you should see its icon next to your address bar.
+## Features
+* **Selectable heading levels:** Users can customize which heading levels (H1-H6) they want to include in the ToC.
+* **Single-click copy:** The generated ToC is copied directly to your clipboard, ready to be pasted into your post.
+* **Real-time generation:** The ToC is generated in real-time as you write your post, ensuring it's always up-to-date.
 
 ## Permissions
+The Ghost ToC Generator extension requires several permissions to operate effectively:
 
-The extension requires the following permissions:
+1. **activeTab:** This permission allows the extension to access and modify the contents of the tab that is currently active. This is used to identify the active post in Ghost.org and generate the ToC.
 
-- `activeTab`: This allows the extension to interact with the active tab when you click the extension's icon.
-- `clipboardWrite`: This allows the extension to write the generated markdown links to your clipboard.
+2. **scripting:** The scripting permission is required to inject and execute scripts in the context of web pages. This is crucial for the ToC generation process, which involves examining the page content, determining headings, and generating the ToC.
+
+3. **clipboardWrite:** This permission allows the extension to modify the user's clipboard. After generating the ToC, the extension uses this permission to automatically copy the ToC to your clipboard.
+
+4. **storage:** This permission allows the extension to use the chrome.storage API to store, retrieve, and track changes to user preferences. In this extension, it's used to store the user's selection of heading levels to include in the ToC.
+
+The extension only uses these permissions when necessary and does not use them to collect or store personal information. 
+
+## Installation
+Clone the repository:
+```
+git clone https://github.com/mettamatt/GhostToCGenerator.git
+```
+Go to Chrome Extensions page (`chrome://extensions`), and then enable Developer mode. Click on "Load Unpacked" and select the cloned directory.
 
 ## Usage
-
-1. Open your Ghost editor and start writing your post.
-2. Once you have added some `h1`, `h2`, `h3` headings, click the extension icon.
-3. The extension will generate a markdown list of anchor links for your headings and copy it to your clipboard.
-4. You will get an alert telling you whether the operation was successful or if there were any errors. If successful, you can paste (Ctrl+V) your copied markdown links wherever you want them in your post.
-
-## Note
-
-- The extension only generates the markdown links and does not insert them into the Ghost editor.
-- The extension does not add id attributes to the heading elements. The actual functionality of these links would require adding the ids to the corresponding headings.
-- Feel free to contribute and improve this extension based on your needs.
+1. Click on the Ghost ToC Generator extension icon while editing a post in Ghost.org. A popup will appear.
+2. Click the "Generate Table of Contents" button. The extension will generate a ToC based on your selected heading levels.
+3. The generated ToC will be automatically copied to your clipboard.
+4. Paste the ToC into your Ghost.org post.
+5. To customize the heading levels, right-click the Ghost ToC Generator extension icon, select "Options", and choose your preferred heading levels.
 
 ## Contributing
-
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-
 [MIT](https://choosealicense.com/licenses/mit/)
+
