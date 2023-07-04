@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const headingSelectors = Object.entries(storage)
                     .filter(([key, value]) => value)
-                    .map(([key]) => `.${key}`)
+                    .map(([key]) => key)
                     .join(', ');
 
                 const results = await chrome.scripting.executeScript({
@@ -71,6 +71,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
+/**
+ * Generate a Table of Contents (ToC) based on the specified headings in a Ghost post,
+ * and copy the generated ToC to the clipboard.
+ *
+ * The function generates an ID for each header based on its text, with special characters
+ * replaced by hyphens and a numeric suffix added if necessary to ensure uniqueness. It then
+ * constructs a Markdown-style link for each header, with the link text being the header text
+ * and the link target being the header's ID. The links are indented based on the heading level
+ * to reflect the document structure.
+ *
+ * After generating the ToC, the function copies it to the clipboard by creating a temporary
+ * textarea element, setting its value to the ToC, selecting the text, and executing the
+ * 'copy' command. It then removes the temporary textarea.
+ *
+ * @param {string} headingSelectors - A comma-separated list of selectors for the heading elements to include in the ToC.
+ * @returns {boolean} - Returns true if the ToC was successfully generated and copied, or false if the editor pane was not found or no headers were found.
+ */
 function generateAndCopyToC(headingSelectors) {
     let editorPane = document.querySelector('.koenig-react-editor');
     if (!editorPane) return false;
@@ -83,13 +100,24 @@ function generateAndCopyToC(headingSelectors) {
     }
 
     let toc = headers.map((header, index) => {
-        // Generate an id for the anchor link based on the header's text
-        let id = header.textContent.trim().toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+        // Get the trimmed text content of the header
+        let text = header.textContent.trim();
 
-        // Append a number suffix if the id already exists
+        // Skip headers with no text
+        if (!text) {
+            return null;
+        }
+
+        // Generate an ID for the anchor link based on the header's text
+        let id = text.toLowerCase().replace(/[\s]+/g, '-');
+
+        // Encode the ID to ensure it's safe for URL use
+        id = encodeURIComponent(id);
+
+        // Append a number suffix if the ID already exists
         let originalId = id;
         let suffix = 2;
-        while (document.getElementById(id)) {
+        while (document.querySelector('#' + CSS.escape(id))) {
             id = `${originalId}-${suffix}`;
             suffix++;
         }
@@ -105,7 +133,7 @@ function generateAndCopyToC(headingSelectors) {
 
         // Return markdown style link with indentation for the ToC
         return `${indentation}- [${header.textContent}](#${encodeURIComponent(id)})`;
-    }).join('\n');
+    }).filter(Boolean).join('\n');
 
     // Create a temporary textarea element to copy the text to clipboard
     const tempTextArea = document.createElement('textarea');
