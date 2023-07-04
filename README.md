@@ -1,4 +1,4 @@
-# Ghost CMS ToC Generator
+# Ghost CMS ToC Generator (Chrome Extension)
 
 ![Logo](./images/icon128.png)
 
