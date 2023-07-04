@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="content.js"></script>
-        <script>
-            window.onload = generateMarkdownLinks;
-        </script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            #generate {
+                background-color: #3080f0;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                transition-duration: 0.4s;
+            }
+            #generate:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .error {
+                color: red;
+            }
+            .update {
+                border: 1px solid #333;
+                padding: 10px;
+                margin-top: 10px;
+            }
+        </style>
     </head>
     <body>
-        <h1>Ghost.org Anchor Link Generator</h1>
+        <h1>Ghost.org Table of Contents Generator</h1>
         <p>
-            Click the extension icon while editing your post in Ghost.org editor to generate a markdown list of anchor links for all h1, h2, h3 headings. The list will be copied to your clipboard.
+            Click the button below while editing your post in Ghost.org editor to generate a markdown Table of Contents for all h1, h2, h3 headings. The list will be copied to your clipboard.
         </p>
+        <button id="generate">Generate Table of Contents</button>
+        <p id="status"></p>
+        <script src="popup.js"></script>
     </body>
 </html>

@@ -1,27 +1,15 @@
 {
-  "name": "Ghost.org Anchor Link Generator",
-  "version": "1.0",
-  "description": "Generate anchor links from headings in the Ghost editor",
   "manifest_version": 3,
-  "permissions": ["activeTab", "scripting"],
-  "icons": {
-    "16": "images/galg16.png",
-    "48": "images/galg48.png",
-    "128": "images/galg128.png"
-  },
+  "name": "Ghost ToC Generator",
+  "version": "1.0",
+  "permissions": ["activeTab", "scripting", "clipboardWrite", "storage"],
   "action": {
+    "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/galg16.png",
-      "48": "images/galg48.png",
-      "128": "images/galg128.png"
-    },
-    "default_title": "Ghost.org Anchor Link Generator",
-    "default_popup": "popup.html"
-  },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*/ghost/*"],
-      "js": ["content.js"]
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
     }
-  ]
+  },
+  "options_page": "options.html"
 }
